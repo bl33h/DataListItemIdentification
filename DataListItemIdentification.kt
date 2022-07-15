@@ -22,5 +22,22 @@ fun main() {
 }
 
 fun processList(inputList: List<Any?>?): List<ItemData>? {
-	TODO("implement function")
+	if (inputList == null) return null
+    
+    for(originalValue in inputList){
+        when(originalValue){
+            is String -> println("String: '$originalValue'")
+            is Int -> println("Integer: '$originalValue'")
+            is Boolean -> println("Boolean: '$originalValue'")
+            else -> println("null")
+        }
+    }
+    
+    return emptyList()
 }
+
+
+
+//fun processList(inputList: List<Any?>?): List<ItemData>? {
+//	return ArrayList<ItemData>()
+//}
