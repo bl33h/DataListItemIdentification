@@ -22,13 +22,16 @@ fun main() {
 }
 
 fun processList(inputList: List<Any?>?): List<ItemData>? {
-	if (inputList == null) return null
-    
+	// Variable lista de los items de la otra cadena
+    ArrayList<ItemData>()
+    // Contador iniciado en 0
+    var i: Int = 0
+    if (inputList == null) return null
     for(originalValue in inputList){
         when(originalValue){
-            is String -> println("Type: String")
-            is Int -> println("Type: int")
-            is Boolean -> println("Type: boolean")
+            is String -> println("String")
+            is Int -> println("entero")
+            is Boolean -> println("Type: booleano")
             else -> println("null")
         }
     }
