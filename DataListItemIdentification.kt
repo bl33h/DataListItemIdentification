@@ -21,6 +21,8 @@ fun main() {
     val result = processList(listOf(25, "Hola", null, false))
     println(result)
 }
+// -----------------------
+
 // Metodo para procesar la lista y retornar el resultado
 fun processList(inputList: List<Any?>?): List<ItemData>? {
 	// Variable lista de los items de la otra cadena
@@ -28,39 +30,40 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     // Contador iniciado en 0
     var i: Int = 0
     if (inputList == null) return null
-    for(originalValue in inputList){
+    for(originalValue2 in inputList){
         // Variables receptivas
             var types: String? = ""
             var infor: String? = ""
             var j = i
         // Ajustes del contador
             i = i + 1
-        when(originalValue){
-            is String -> //println("String")
+        if(originalValue2 != null){
+        when(originalValue2){
+            is String ->
             { types = "cadena"
-              infor = ("L" + originalValue.length)}
+              infor = ("L" + originalValue2.length)}
             is Int ->
             { types = "entero"
-            if (originalValue%10 == 0){ 
+            if (originalValue2%10 == 0){ 
             infor = ("M10")}
-            else if (originalValue%5 == 0){ 
+            else if (originalValue2%5 == 0){ 
             infor = ("M5")}
-            else if (originalValue%2 == 0){ 
+            else if (originalValue2%2 == 0){ 
             infor = ("M2")}
             else {
                 infor = null
             }
-            } //println("entero")
+            }
             is Boolean -> 
             {types = "booleano"
-            if (originalValue == true){ 
+            if (originalValue2 == true){ 
                 infor = ("Verdadero")}
-            else if (originalValue == false){ 
+            else if (originalValue2 == false){ 
                 infor = ("Falso")}
             else {
                 infor = null
                     }
-            }//println("Type: booleano")
+            }
             // Caso extraordinario
             else -> {types = null
             infor = null}
@@ -68,7 +71,7 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
         // Elementos
     val element = ItemData(
         originalPos = j,
-        originalValue = originalValue,
+        originalValue = originalValue2,
         type = types,
         info = infor  
     )
@@ -78,6 +81,8 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     resultList.add(element)
     // ------------------------
         }
+    }
     // Retorno de la lista con los valores implementados
     return resultList
     }
+	// -----------------------
