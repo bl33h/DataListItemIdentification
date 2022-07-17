@@ -82,7 +82,8 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     // ------------------------
         }
     }
+    
     // Retorno de la lista con los valores implementados
     return resultList
     }
-	// -----------------------
+	// ------------------------
