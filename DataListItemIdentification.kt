@@ -24,17 +24,18 @@ fun main() {
 // Metodo para procesar la lista y retornar el resultado
 fun processList(inputList: List<Any?>?): List<ItemData>? {
 	// Variable lista de los items de la otra cadena
-    resultList = ArrayList<ItemData>()
+    val resultList = ArrayList<ItemData>()
     // Contador iniciado en 0
     var i: Int = 0
     if (inputList == null) return null
     for(originalValue in inputList){
-        when(originalValue){
-            // Variables receptivas
+        // Variables receptivas
             var types: String? = ""
-            var infor = String? = ""
-            // Ajustes del contador
+            var infor: String? = ""
+            var j = i
+        // Ajustes del contador
             i = i + 1
+        when(originalValue){
             is String -> //println("String")
             { types = "cadena"
               infor = ("L" + originalValue.length)}
@@ -58,15 +59,25 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
                 infor = ("Falso")}
             else {
                 infor = null
-                    }}//println("Type: booleano")
+                    }
+            }//println("Type: booleano")
             // Caso extraordinario
             else -> {types = null
-            infor = null} 
+            infor = null}
         }
-    }
-    // -----------------------
-    
+        // Elementos
+    val element = ItemData(
+        originalPos = j,
+        originalValue = originalValue,
+        type = types,
+        info = infor  
+    )
+    // ------------------------
+
+    // Adicion a la lista
+    resultList.add(element)
+    // ------------------------
+        }
     // Retorno de la lista con los valores implementados
-    return emptyList()
-}
-// -----------------------
+    return resultList
+    }
