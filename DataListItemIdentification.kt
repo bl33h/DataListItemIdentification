@@ -31,17 +31,37 @@ fun processList(inputList: List<Any?>?): List<ItemData>? {
     for(originalValue in inputList){
         when(originalValue){
             // Variables receptivas
-            var types: String? = " "
-            var infor = String? = " "
+            var types: String? = ""
+            var infor = String? = ""
             // Ajustes del contador
             i = i + 1
             is String -> //println("String")
-            { }
+            { types = "cadena"
+              infor = ("L" + originalValue.length)}
             is Int ->
-            { } //println("entero")
+            { types = "entero"
+            if (originalValue%10 == 0){ 
+            infor = ("M10")}
+            else if (originalValue%5 == 0){ 
+            infor = ("M5")}
+            else if (originalValue%2 == 0){ 
+            infor = ("M2")}
+            else {
+                infor = null
+            }
+            } //println("entero")
             is Boolean -> 
-            { }//println("Type: booleano")
-            else -> println("null")
+            {types = "booleano"
+            if (originalValue == true){ 
+                infor = ("Verdadero")}
+            else if (originalValue == false){ 
+                infor = ("Falso")}
+            else {
+                infor = null
+                    }}//println("Type: booleano")
+            // Caso extraordinario
+            else -> {types = null
+            infor = null} 
         }
     }
     // -----------------------
