@@ -3,11 +3,11 @@
     * @author Sara Echeverria
     * FileName: DataListItemIdentification
     @version: I
-    - Creacion: 15/07/2022
-    - Ultima modificacion: 16/07/2022
+    - Creation: 15/07/2022
+    - Last modification: 22/07/2022
  */
 
-// Data class ---
+// DATA CLASS ---
 data class ItemData(
     var originalPos: Int,
     var originalValue: Any,
@@ -16,74 +16,63 @@ data class ItemData(
 )
 // -----------------------
 
-// Metodo main
+// MAIN METHOD ---
 fun main() {
     val result = processList(listOf(25, "Hola", null, false))
     println(result)
 }
+// PROCESS LIST METHOD ---
+/* Returns the result for each case. */
+fun processList(inputList: List<Any?>?): List<ItemData>? {
+    // --- Results array for each case ---
+    val resultList = ArrayList<ItemData>()
+    if (inputList == null) return null
+        for((index, item) in inputList.withIndex()){
+        if (item != null){
+            var element = ItemData(
+            originalPos = index,
+            originalValue = item,
+            type = identifyType(item),
+            info = identifyInfo(item))
+            // Addition of elements in the new list
+            resultList.add(element)
+        }
+	}
+    
+    // It returns the new list with the new info.
+    return resultList
+}
 // -----------------------
 
-// Metodo para procesar la lista y retornar el resultado
-fun processList(inputList: List<Any?>?): List<ItemData>? {
-	// Variable lista de los items de la otra cadena
-    val resultList = ArrayList<ItemData>()
-    // Contador iniciado en 0
-    var i: Int = 0
-    if (inputList == null) return null
-    for(originalValue2 in inputList){
-        // Variables receptivas
-            var types: String? = ""
-            var infor: String? = ""
-            var j = i
-        // Ajustes del contador
-            i = i + 1
-        if(originalValue2 != null){
-        when(originalValue2){
-            is String ->
-            { types = "cadena"
-              infor = ("L" + originalValue2.length)}
-            is Int ->
-            { types = "entero"
-            if (originalValue2%10 == 0){ 
-            infor = ("M10")}
-            else if (originalValue2%5 == 0){ 
-            infor = ("M5")}
-            else if (originalValue2%2 == 0){ 
-            infor = ("M2")}
-            else {
-                infor = null
-            }
-            }
-            is Boolean -> 
-            {types = "booleano"
-            if (originalValue2 == true){ 
-                infor = ("Verdadero")}
-            else if (originalValue2 == false){ 
-                infor = ("Falso")}
-            else {
-                infor = null
-                    }
-            }
-            // Caso extraordinario
-            else -> {types = null
-            infor = null}
-        }
-        // Elementos
-    val element = ItemData(
-        originalPos = j,
-        originalValue = originalValue2,
-        type = types,
-        info = infor  
-    )
-    // ------------------------
+// TYPE METHOD ---
+/* Makes an action depending on the type of data it identifies in the list. */
+fun identifyType(item: Any?): String?{
+    return when(item){
+        is String -> "cadena"
+        is Int -> "entero"
+        is Boolean -> "booleano"
+        else -> null}
+}
 
-    // Adicion a la lista
-    resultList.add(element)
-    // ------------------------
-        }
-    }
-    
-    // Retorno de la lista con los valores implementados
-    return resultList
-    }
-	// ------------------------
+// IDENTIFICATION METHOD ---
+/* Makes an action depending on the type of data it identifies in the list. */
+fun identifyInfo(item: Any?): String?{
+    return when(item){
+        is String -> "L" + item.length
+        is Int -> multipleInt(item) 
+        is Boolean -> if (item) "verdadero" else "falso"
+        else -> null}
+}
+// ------------------------
+
+// IS IT A MULTIPLE METHOD ---
+/* Verifies if the number is a multiple of 10, 5 or 2. */
+fun multipleInt(int: Int):String?{
+    var info: String?=""
+    if (int%10 == 0) info = "M10"
+    else if (int%5 == 0) info = "M5"
+    else if (int%2 == 0) info = "M2"
+    else info = null
+    return info
+}
+// ------------------------
